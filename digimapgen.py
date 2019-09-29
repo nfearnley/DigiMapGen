@@ -12,7 +12,7 @@ direct = {
     'SOUTH': 270,
     'WEST': 180}
 #Current version number.
-version = "0.1.1"
+version = "0.1.1.1"
 #Amount of generators.
 gencount = 0
 #Move types.
@@ -141,4 +141,7 @@ def gen0():
     map = [[0] * settings['mapwidth']] * settings['mapwidth']
 
 #Main loop.
-main()
+try:
+    main()
+except turtle.Terminator:
+    logger.crit("Program terminated early!")
