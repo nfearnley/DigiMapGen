@@ -12,9 +12,9 @@ direct = {
     'SOUTH': 270,
     'WEST': 180}
 #Current version number.
-version = "0.1.0"
+version = "0.1.1"
 #Amount of generators.
-gencount = 1
+gencount = 0
 #Move types.
 ROW = 1
 COL = 2
@@ -66,8 +66,9 @@ def chooseSettings():
     #Get animation delay from user.
     delay = turtle.numinput('DigiMapGen', 'Set animation delay:', 0)
     if delay <= 0:
-        turtle.tracer(None)
+        turtle.tracer(False)
         turtle.delay(delay)
+        turtle.speed(0)
     else:
         turtle.delay(delay)
     #Get the window size from the config.
@@ -123,6 +124,7 @@ def drawMap():
             drawTile()
             move(ROW)
         move(COL)
+    turtle.tracer(True)
     turtle.hideturtle()
     turtle.done()
 
@@ -136,20 +138,7 @@ def debugInfo():
 def gen0():
 #Generator 0: Plain grid
     global map
-    #map = [[] * settings['mapwidth']]
-    #for i in range(settings['mapwidth']):
-    #    for j in range(settings['mapwidth']):
-    #        map[i][j] = 0
-    map = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+    map = [[0] * settings['mapwidth']] * settings['mapwidth']
 
 #Main loop.
 main()
