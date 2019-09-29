@@ -1,0 +1,2 @@
+python digimapgen.py
+pause
