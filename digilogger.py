@@ -10,16 +10,16 @@ def time():
     return (fore.MAGENTA + strftime("%d %b %H:%M:%S | ", localtime()) + style.RESET)
 
 def warn(message):
-    print(time() + fore.YELLOW + message + style.RESET)
+    print(time() + fore.YELLOW + str(message) + style.RESET)
 
 def crit(message):
-    print(time() + back.RED + style.BOLD + message + style.RESET)
+    print(time() + back.RED + style.BOLD + str(message) + style.RESET)
 
 def test(message):
-    print(time() + fore.BLUE + message + style.RESET)
+    print(time() + fore.BLUE + str(message) + style.RESET)
 
 def msg(message):
-    print(time() + fg(51) + message + style.RESET)
+    print(time() + fg(51) + str(message) + style.RESET)
 
 def load(message):
-    return (fg(238) + message + style.RESET)
+    print(fg(238) + str(message) + style.RESET)
