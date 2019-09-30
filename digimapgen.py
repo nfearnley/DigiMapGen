@@ -12,9 +12,9 @@ direct = {
     'SOUTH': 270,
     'WEST': 180}
 #Current version number.
-version = "0.2.1"
+version = "0.2.2"
 #Amount of generators.
-gencount = 0
+gencount = 1
 #Maximum tileset ID.
 tilemax = 5
 #Move types.
@@ -198,6 +198,7 @@ def generate(n):
 #Splits off into various generator functions.
     if n > gencount: return
     elif n == 0: gen0()
+    elif n == 1: gen1()
     else: return
 
 def gen0():
@@ -205,6 +206,13 @@ def gen0():
     tilechoice = int(turtle.numinput('DigiMapGen', 'What tile?:', 0, 0, tilemax))
     global map
     map = [[tilechoice] * settings['mapwidth']] * settings['mapwidth']
+    for row in map:
+        logger.load(row)
+
+def gen1():
+#Generator 1: Overworld
+    global map
+    map = [[tileset['GRASS'][ID]] * settings['mapwidth']] * settings['mapwidth']
     for row in map:
         logger.load(row)
 
