@@ -12,11 +12,11 @@ direct = {
     'SOUTH': 270,
     'WEST': 180}
 #Current version number.
-version = "0.2"
+version = "0.2.1"
 #Amount of generators.
 gencount = 0
 #Maximum tileset ID.
-tilemax = 1
+tilemax = 5
 #Move types.
 ROW = 1
 COL = 2
@@ -30,7 +30,11 @@ TEXTCOLOR = 4
 #Tileset.
 tileset = {
 'MISSINGNO' : [0, '#a832a6', '#330e32', '?', '#ffffff'],
-'GRASS' : [1, '#14a333', '#2e1a03', None, None]
+'GRASS' : [1, '#14a333', '#2e1a03', None, None],
+'WATER' : [2, '#19cbd1', '#19cbd1', None, None],
+'SAND' : [3, '#fff373', '#ffce52', None, None],
+'TREE' : [4, '#14a333', '#2e1a03', '\uD83C\uDF32', '#2e1a03'],
+'BLACK' : [5, '#000000', '#ffffff', None, None]
 }
 
 #Settings.
@@ -121,6 +125,10 @@ def chooseTile(n):
     if n > tilemax: return 'MISSINGNO'
     elif n == tileset['MISSINGNO'][ID]: return 'MISSINGNO'
     elif n == tileset['GRASS'][ID]: return 'GRASS'
+    elif n == tileset['WATER'][ID]: return 'WATER'
+    elif n == tileset['SAND'][ID]: return 'SAND'
+    elif n == tileset['TREE'][ID]: return 'TREE'
+    elif n == tileset['BLACK'][ID]: return 'BLACK'
     else: return 'MISSINGNO'
 
 def drawTile(tile):
@@ -171,7 +179,7 @@ def drawMap():
         currentrow += 1
         for i in row:
             currentsquare += 1
-            logger.msg(f"Drawing tile: ({currentrow}, {currentsquare}) {chooseTile(i)}")
+            logger.msg(f"Drawing tile: ({currentrow}, {currentsquare}) {i}/{chooseTile(i)}")
             drawTile(i)
             move(ROW)
         move(COL)
@@ -194,8 +202,9 @@ def generate(n):
 
 def gen0():
 #Generator 0: Plain grid
+    tilechoice = int(turtle.numinput('DigiMapGen', 'What tile?:', 0, 0, tilemax))
     global map
-    map = [[1] * settings['mapwidth']] * settings['mapwidth']
+    map = [[tilechoice] * settings['mapwidth']] * settings['mapwidth']
     for row in map:
         logger.load(row)
 
