@@ -1,13 +1,14 @@
-from time import strftime, localtime
-from colored import fore, back, style, fg, bg, attr
 import os
 
-#Activate color mode.
-os.system('')
+from time import strftime, localtime
+from colored import fore, back, style, fg
 
-# Color styling for terminal messages.
+# Activate color mode
+os.system("")
+
+# Color styling for terminal messages
 def time():
-    return (fore.MAGENTA + strftime("%d %b %H:%M:%S | ", localtime()) + style.RESET)
+    return fore.MAGENTA + strftime("%d %b %H:%M:%S | ", localtime()) + style.RESET
 
 def warn(message):
     print(time() + fore.YELLOW + str(message) + style.RESET)
@@ -20,6 +21,9 @@ def test(message):
 
 def msg(message):
     print(time() + fg(51) + str(message) + style.RESET)
+
+def debug(message):
+    print(time() + fore.LIGHT_GREEN + str(message) + style.RESET)
 
 def load(message):
     print(fg(238) + str(message) + style.RESET)
