@@ -26,6 +26,9 @@ FILL = 1
 OUTLINE = 2
 TEXT = 3
 TEXTCOLOR = 4
+#ROW and SQ.
+ROW = 0
+SQ = 1
 
 #Tileset.
 tileset = {
@@ -33,7 +36,7 @@ tileset = {
 'GRASS' : [1, '#14a333', '#2e1a03', None, None],
 'WATER' : [2, '#19cbd1', '#19cbd1', None, None],
 'SAND' : [3, '#fff373', '#ffce52', None, None],
-'TREE' : [4, '#14a333', '#2e1a03', '\uD83C\uDF32', '#2e1a03'],
+'TREE' : [4, '#14a333', '#2e1a03', '\uD83C\uDF32', '#2e1a03'], #Unicode character: 🌲
 'BLACK' : [5, '#000000', '#ffffff', None, None]
 }
 
@@ -212,7 +215,20 @@ def gen0():
 def gen1():
 #Generator 1: Overworld
     global map
+
+    #Fill the map with grass.
     map = [[tileset['GRASS'][ID]] * settings['mapwidth']] * settings['mapwidth']
+
+    #LAKE GEN
+    #Dot lakes across the map.
+    lakes = []
+    for row in range(0, settings['mapwidth'] - 1):
+        for sq in range(0, settings['mapwidth'] - 1):
+            if random.randint(1, 20) == 1:
+                map[row][sq] = tileset['WATER'][ID]
+                lakes.append([row, sq])
+
+    #Print the finished map.
     for row in map:
         logger.load(row)
 
